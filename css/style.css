@@ -1,5 +1,9 @@
 /* ---------- Tokens ---------- */
 :root{
+  :root{
+  --card-shift-x: -30px;
+  /* ...existing tokens... */
+}
   --navy: #0b0a1f;
   --navy-2: #14122b;
   --violet: #6c4df6;
@@ -122,15 +126,15 @@ p{margin:0;}
              swayCard 4.5s ease-in-out 1.4s infinite;
 }
 @keyframes dropCard{
-  0%{ transform: translateX(-30px) translateY(-520px) rotate(0deg); }
-  55%{ transform: translateX(-30px) translateY(14px) rotate(-2deg); }
-  72%{ transform: translateX(-30px) translateY(-8px) rotate(1.5deg); }
-  86%{ transform: translateX(-30px) translateY(4px) rotate(-1deg); }
-  100%{ transform: translateX(-30px) translateY(0) rotate(0deg); }
+  0%{ transform: translateX(var(--card-shift-x)) translateY(-520px) rotate(0deg); }
+  55%{ transform: translateX(var(--card-shift-x)) translateY(14px) rotate(-2deg); }
+  72%{ transform: translateX(var(--card-shift-x)) translateY(-8px) rotate(1.5deg); }
+  86%{ transform: translateX(var(--card-shift-x)) translateY(4px) rotate(-1deg); }
+  100%{ transform: translateX(var(--card-shift-x)) translateY(0) rotate(0deg); }
 }
 @keyframes swayCard{
-  0%, 100%{ transform: translateX(-30px) translateY(0) rotate(-1deg); }
-  50%{ transform: translateX(-30px) translateY(0) rotate(1deg); }
+  0%, 100%{ transform: translateX(var(--card-shift-x)) translateY(0) rotate(-1deg); }
+  50%{ transform: translateX(var(--card-shift-x)) translateY(0) rotate(1deg); }
 }
 .lanyard{
   width:90px; height:300px; margin:0 auto;
@@ -298,7 +302,14 @@ p{margin:0;}
 /* ---------- Responsive ---------- */
 @media (max-width: 980px){
   .hero-inner, .about-grid, .contact-grid{grid-template-columns:1fr;}
-  .hero-visual{order:-1; margin-bottom:12px;}
+  .hero-visual{
+    order:-1;
+    margin-bottom:12px;
+    flex-direction: column;      /* stack card above role boxes */
+    align-items: center;
+    --card-shift-x: 0px;         /* no left-shift needed when stacked */
+  }
+  .role-stack{ margin-top: 20px; }
   .skills-track{grid-template-columns:repeat(3,1fr);}
   .projects-grid{grid-template-columns:1fr 1fr;}
   .journey-grid{grid-template-columns:1fr 1fr;}
@@ -318,4 +329,5 @@ p{margin:0;}
   .journey-grid{grid-template-columns:1fr;}
   .footer-inner{grid-template-columns:1fr;}
   .form-row{grid-template-columns:1fr;}
+  html, body{ overflow-x: hidden; }
 }
